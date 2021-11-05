@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-    TODO++ is a next-generation TODO task management web application
+    TODO++ is a next-generation TODO task management web application (University Project)
 </p>
 
 
