@@ -2,18 +2,18 @@ var express = require("express");
 var app = express();
 
 //TODO: Change src folder to dist folder before production
-var filesPath = 'src';
+var filesPath = '/src/';
 
 
 //Serving static content with express middleware (dist directory)
 app.use(express.static(filesPath));
 
 app.get('/', (req, res) => {
-    res.sendFile(filePath + '/index.html');
+    res.sendFile(__dirname + filesPath + 'index.html');
 });
 
 app.get('/todo-form', (req, res) => {
-    res.sendFile(filePath + '/todo-form.html');
+    res.sendFile(__dirname + filesPath + 'todo-form.html');
 });
 
 
