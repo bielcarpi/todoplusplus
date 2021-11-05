@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
     res.sendFile(filePath + '/index.html');
 });
 
-app.get('/todo-form.html', (req, res) => {
+app.get('/todo-form', (req, res) => {
     res.sendFile(filePath + '/todo-form.html');
 });
 
