@@ -68,7 +68,7 @@ $ npm run dev-start
 
 >The [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause)
 >
->Copyright (c) 2021, HexStorm9
+>Copyright (c) 2021, Biel Carpi
 >
 >All rights reserved.
 >
