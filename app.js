@@ -1,8 +1,9 @@
 const express = require("express");
 const config = require("./config");
 
-const app = express();
 const PORT = config.express.port;
+const app = express();
+app.disable('x-powered-by');
 
 let staticFilesPath = '';
 if(process.argv.length < 3){ //If there is no cli argument, we'll assume we're in a normal build (the static files path is dist)
