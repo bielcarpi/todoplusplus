@@ -4,7 +4,9 @@
   "description": "Next generation TODO+ task management web application",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node -e 'require(\"./config.js\").configureNormalBuild() && node app.js",
+    "dev-start": "node -e 'require(\"./config.js\").configureDevBuild() && nodemon app.js",
+    "build": "rm -rf ./dist/* && node build/build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
