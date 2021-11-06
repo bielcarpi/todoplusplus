@@ -1,14 +1,22 @@
-const expressDomain = 'http://localhost'; // 'http://172.18.0.8'; // Change me
-const expressPort = '8080'; // Change me
-const expressDomainAndPort = `${expressDomain}:${expressPort}`;
+const expressDomain = 'http://localhost';
+const expressPort = '3000'; 
+let staticFilesPath = './dist/';
+
+//To be called before we want to build a normal version, so as to correctly configure this config file
+module.exports.configureNormalBuild() = function(){
+    staticFilesPath = './dist/';
+}
+
+//To be called before we want to build a dev version, so as to correctly configure this config file
+module.exports.configureDevBuild() = function(){
+    staticFilesPath = './src/';
+}
 
 module.exports = {
-    browserSync: {
-        proxy: expressDomainAndPort
-    },
     express: {
         domain: expressDomain,
-        port: expressPort
+        port: expressPort,
+        staticFilesPath: staticFilesPath
     },
     html: {
         outDir: './dist',

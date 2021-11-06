@@ -1,22 +1,23 @@
-var express = require("express");
-var app = express();
+const express = require("express");
+const config = require("./config");
 
-//TODO: Change src folder to dist folder before production
-var filesPath = '/src/';
+const app = express();
+const PORT = config.express.port;
+const staticFilesPath = __dirname + '/' + config.express.staticFilesPath; 
 
 
 //Serving static content with express middleware (dist directory)
-app.use(express.static(filesPath));
+app.use(express.static(staticFilesPath));
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + filesPath + 'index.html');
+    res.sendFile(filesPath + 'index.html');
 });
 
 app.get('/todo-form', (req, res) => {
-    res.sendFile(__dirname + filesPath + 'todo-form.html');
+    res.sendFile(filesPath + 'todo-form.html');
 });
 
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000');
+app.listen(PORT, () => {
+    console.log('Listening on port ' + PORT);
 }); 
