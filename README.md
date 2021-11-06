@@ -32,6 +32,26 @@
 
 ## How To Use
 ```bash
+# Clone this repository
+$ git clone https://github.com/bielcarpi/todoplusplus/tree/develop
+
+# Install npm packages
+$ npm install
+
+----
+# Build the project
+$ npm run build
+
+# Run it 
+$ npm start
+----
+
+## or
+
+----
+# Run the project in dev-mode (from src instead of dist, with nodemon)
+$ npm run dev-start
+----
 ```
 
 
