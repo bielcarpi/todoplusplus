@@ -1,22 +1,10 @@
 const expressDomain = 'http://localhost';
 const expressPort = '3000'; 
-let staticFilesPath = './dist/';
-
-//To be called before we want to build a normal version, so as to correctly configure this config file
-module.exports.configureNormalBuild() = function(){
-    staticFilesPath = './dist/';
-}
-
-//To be called before we want to build a dev version, so as to correctly configure this config file
-module.exports.configureDevBuild() = function(){
-    staticFilesPath = './src/';
-}
 
 module.exports = {
     express: {
         domain: expressDomain,
         port: expressPort,
-        staticFilesPath: staticFilesPath
     },
     html: {
         outDir: './dist',
