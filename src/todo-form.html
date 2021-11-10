@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <!-- HTML5 Boilerplate-->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <!-- HTML5 Boilerplate-->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Setting title and description, keywords (metas) of the webpage -->
-    <title>TODO++ | Duty Form</title>
-    <meta name="description" content="TODO++ is a next-generation TODO task management web application built with node.js">
-    <meta name="keywords" content="node, task, management, TODO, list, web, aplication, next, generation">
-    <meta name="author" content="Pol Saula">
-</head>
-<body>
-    <h1>Todo Form</h1>
-</body>
+        <!-- Setting title and description, keywords (metas) of the webpage -->
+        <title>TODO++ | Duty Form</title>
+        <meta name="description" content="TODO++ is a next-generation TODO task management web application built with node.js">
+        <meta name="keywords" content="node, task, management, TODO, list, web, aplication, next, generation">
+        <meta name="author" content="Pol Saula">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <main>
+            <h1>Todo Form</h1>
+            <div class="form">
+                <form action="/action_page.php">
+                    <label for="taskTitle">Title</label>
+                    <input type="text" id="taskTitle" name="title">
+                
+                    <label for="taskDeadline">Deadline</label>
+                    <input type="text" id="taskDeadline" name="deadline">
+                
+                    <label for="taskCategory">Category</label>
+                    <select id="taskCategory" name="category" placeholder="Select category">
+                        <option selected disabled>Select category</option>
+                        <option value="australia">Australia</option>
+                        <option value="canada">Canada</option>
+                        <option value="usa">USA</option>
+                    </select>
+                
+                    <label for="taskDescription">Subject</label>
+                    <textarea id="taskDescription" name="description" style="height:200px"></textarea>
+                
+                </form>
+                <div class="envia">
+                    <input type="checkbox" name="Completed" id="taskCompleted">
+                    <p>Completed</p>
+                    <input type="submit" value="Accept">
+                    <input type="submit" value="Cancel">
+                </div>
+              </div>
+        </main>
+    </body>
 </html>
