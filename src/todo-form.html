@@ -11,12 +11,16 @@
         <meta name="description" content="TODO++ is a next-generation TODO task management web application built with node.js">
         <meta name="keywords" content="node, task, management, TODO, list, web, aplication, next, generation">
         <meta name="author" content="Pol Saula">
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/todo-form.css">
         <link rel="stylesheet" href="css/styles.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/pages/storage-manager.js"></script>
         <script src="js/pages/todo-form.js"></script>
     </head>
     <body>
         <main>
-            <h1>Todo Form</h1>
             <div class="form">
                 <div class="hdr">
                     <img src="media/img/logo-salle.png" alt="Logo Salle" class="currImg" id="taskLogo">
@@ -29,7 +33,7 @@
                         <img src="media/img/v.png" alt="v logo" id="vLogo" onclick="changeTaskImage()">
                     </div>
                 </div>
-                <form action="/my-handling-form-page" method="post">
+                <form>
                     <div class="fila">
                         <div class="title">
                             <label for="taskTitle">Title</label>
@@ -41,29 +45,29 @@
                         </div>
                     </div>
                     <label for="taskCategory">Category</label>
-                    <select id="taskCategory" name="category" placeholder="Select category">
+                    <div id="taskCategory" name="category" placeholder="Select category">
                         <option selected disabled>Select category</option>
-                        <option value="development">Development</option>
-                        <option value="miscellaneous">Miscellaneous</option>
-                        <option value="personal-projects">Personal Projects</option>
-                        <option value="uni-projects">Uni Projects</option>
-                    </select>
+                    </div>
                 
                     <label for="taskDescription">Description</label>
                     <textarea id="taskDescription" name="description" style="height:200px"></textarea>
-                
-                </form>
-                <div class="envia">
-                    <div class="check">
-                        <input type="checkbox" name="Completed" id="taskCompleted">
-                        <p>Completed</p>
-                    </div>
                     
-                    <div class="buttons">
-                        <input type="submit" value="Cancel">
-                        <input type="submit" value="Accept">
+                    <p class="error" id="errorname"></p>
+
+                    <div class="envia">
+                        <div class="check">
+                            <input type="checkbox" name="completed" id="taskCompleted">
+                            <p>Completed</p>
+                        </div>
+                        
+                        <div class="buttons">
+                            <a href="index.html">
+                                <div class="normal-button" value="Cancel">Cancel</div>
+                            </a>
+                            <div class="normal-button" value="Accept" onclick="validateFormOnSubmit()">Accept</div>
+                        </div>
                     </div>
-                </div>
+                </form>
               </div>
         </main>
     </body>

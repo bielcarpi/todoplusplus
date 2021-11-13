@@ -12,25 +12,111 @@
     <meta name="keywords" content="node, task, management, TODO, list, web, aplication, next, generation">
     <meta name="author" content="Belen Garcia, Biel Carpi">
 
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/pages/status.js"></script>
+    <script src="js/pages/search-engine.js"></script>
+    <script src="js/pages/categories.js"></script>
+    <script src="js/pages/tasks-list.js"></script>
+    <script src="js/pages/index.js"></script>
 </head>
 <body>
     <main>
+
         <!-- Add TODO Section-->
         <section id="add-todo">
-            <header>
-                <h1>TODO ++</h1>
-
+            <header class="header-logo">
+                <img src="media/img/logo.png" alt="logo">
+                <h2>TODO++</h2>
             </header>
+            <button class="normal-button enabled" id="add" onclick="todo-form.html">
+                <p>Add TODO</p>
+            </button>
+            <div class="view-what-tasks">
+                <div> 
+                    <a class="view-options" href="today">★  Today</a> <!--T'ha de portar a les tasques que tenen deadline avui-->
+                </div>
+                <div class="view-options"> 
+                    <a href="all duties">★  All duties</a>  <!--T'ha de portar a veure totes les tasques-->
+                </div>
+            
+                <div class="view-options"> 
+                    <p>★   Categories</p>
+                    <div class="categories-add">
+                        <select class="select-category-color" name="categoryColor" placeholder="Select category color">
+                            <option selected disabled></option>
+                            <option value="F94144">★</option>
+                            <option value="F9C74F">★</option>
+                            <option value="43AA8B">★</option>
+                            <option value="666666">★</option>
+                            <option value="FFFFFF">★</option>
+                        </select>
+                        <div class="category-name-textbox"> 
+                            <input type="category-name" name="category-name" id="category-name"></input>
+                        </div>
+                        <button class="button-confirm-category">
+                            <p>✔</p>
+                        </button>
+                    </div>
+                </div>
+            </div>        
         </section>
-
         <!-- View Tasks Section -->
         <section id="view-tasks">
-            <header>
-                <h1>≡ All Duties</h1>
+            <h1>★ All Duties</h1>
+            <div class="horizontal-form">
+                <div>
+                    <div class="normal-button" onclick="selectAllClicked()">
+                        <span>Select All</span>
+                    </div>
 
-            </header>
+                    <div class="normal-button squared disabled" onclick="doneSelectedClicked()">
+                        <span>✔</span>
+                    </div>
+
+                    <div class="normal-button squared disabled" onclick="deleteSelectedClicked()">
+                        <span>✘</span>
+                    </div>
+                </div>
+                <div class="searchbox-container">
+                    <input type="search" name="searchbox" id="searchbox">
+                    <span>✘</span>
+                </div>
+            </div>
+
+            <div class="task-list">
+                
+                <div class="task" id="task1">
+                    <div class="task-subcontainer task-checkbox-container">
+                        <input type="checkbox">
+                    </div>
+                    <div class="task-subcontainer task-description-container">
+                        <div class="task-main-info">
+                            <h2 class="task-title">Web Projects 1</h2>
+                            <div>
+                                <span class="task-urgent">Urgent!</span>
+                                <span class="task-date">20/11/2021</span>
+                            </div>
+                        </div>
+                        <p class="task-description">Create a TODO list site web</p>
+                        <div class="task-categories">
+                            <div class="task-category">
+                                <span>Development</span>
+                                <div style="background-color: red;"></div>
+                            </div>
+                            <div class="task-category">
+                                <span>Uni Projects</span>
+                                <div style="background-color: green;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
         </section>
     </main>
 </body>

@@ -1,7 +1,6 @@
 html{
     height: 100%;
 }
-
 body{
     height: 100%;
     background-color: #F1F1F1;
@@ -14,10 +13,173 @@ main{
 section#add-todo{
     flex-grow: 2;
     background-color: white;
-    margin: 20px;
     border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+    align-items: flex-start;
 }
 section#view-tasks{
     flex-grow: 6;
     padding: 50px 100px;
+}
+
+/* View Tasks Section
+ * -----------------------------------------------------------------------------------
+ */
+
+ #view-tasks h1{
+     font-size: 35px;
+     font-weight: 700;
+     margin: 35px 0;
+ }
+
+ .horizontal-form{
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .searchbox-container{
+     background-color: #E1DFE8;
+     border-radius: 4px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     padding: 0 20px;
+ }
+ #searchbox{
+     background-color: #E1DFE8;
+     font-weight: 500;
+     font-family: 'Roboto', sans-serif;
+     font-size: 20px;
+     size: 20;
+     margin: 0 10px;
+     border: none;
+ }
+
+ .task-list{
+     display: flex;
+     flex-flow: column wrap;
+     margin-top: 20px;
+ }
+ .task{
+     display: flex;
+     margin: 15px 0;
+ }
+
+ .task-subcontainer{
+     background-color: white;
+     border-radius: 8px;
+     box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.1);
+ }
+ .task-checkbox-container{
+     display: flex;
+     align-items: center;
+     padding: 30px 50px;
+     margin-right: 20px;
+ }
+ .task-checkbox-container input[type=checkbox]{
+     border-radius: 5px;
+     transform: scale(2);
+     /* Checkbox styles cannot be modified */
+ }
+ .task-description-container{
+     flex-basis: 100%;
+     padding: 5px 20px;
+ }
+
+ .task-main-info{
+     margin: 15px 0;
+     display: flex;
+     justify-content: space-between;
+     align-content: center;
+ }
+ .task-title{
+     font-size: 25px;
+ }
+ .task-urgent{
+     color: #6549AB;
+     font-weight: 900;
+     margin: 0 20px;
+ }
+ .task-date{
+     font-weight: 700;
+ }
+ .task-description{
+     color: #8A8A8A;
+     font-weight: 300;
+ }
+ .task-categories{
+     display: flex;
+     flex-direction: row-reverse;
+ }
+ .task-category{
+     margin: 5px 15px;
+     display: flex;
+ }
+ .task-category div{
+     width: 15px;
+     height: 15px;
+     border-radius: 4px;
+     margin-left: 6px;
+ }
+ 
+
+/* Add Categories Section
+ * -----------------------------------------------------------------------------------
+ */
+
+.header-logo{
+    display: flex;
+    flex-direction: row;
+    font-size: x-large;
+    -ms-flex-item-align: center;
+    flex-wrap: wrap;
+    align-content: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.button-confirm-category{
+    border: none;
+    border-radius: 5px;
+    padding: 4px;
+    font-weight: 800;
+    background-color: #E1DFE8;
+}
+.categories-add{
+    padding-top:20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.select-category-color{
+    background-color: #E1DFE8;
+    border: none;
+    border-radius: 4px;
+    margin-right: 2px;
+}
+.category-name-textbox{
+    margin-right: 2px;
+    background-color: #E1DFE8;
+    border: none;
+    border-radius: 4px;
+}
+#category-name{
+    background-color: #E1DFE8;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    border: none;
+    width: 100px;
+    margin: 0 10px;
+}
+.view-what-tasks{
+    padding: 10px;
+    margin: 10px;
+}
+.view-options{
+    padding-top: 20px;
+    font-size: large;
+}
+
+button#add{
+    color: white;
+    background-color: #6247AA;
 }
