@@ -1,0 +1,23 @@
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    background-color: #F1F1F1;
+}
+main{
+    display: flex;
+    height: 100%;
+}
+
+section#add-todo{
+    flex-grow: 2;
+    background-color: white;
+    margin: 20px;
+    border-radius: 20px;
+}
+section#view-tasks{
+    flex-grow: 6;
+    padding: 50px 100px;
+}
