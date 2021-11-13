@@ -79,6 +79,14 @@ input[type=text], textarea {
     color: black;
 }
 
+#taskCategory:hover{
+    cursor: pointer;
+}
+
+#taskCategory i{
+    padding-left: 50px;
+}
+
 .error{
     color: #D8000C;
     text-align: center;

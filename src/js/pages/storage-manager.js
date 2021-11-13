@@ -18,7 +18,6 @@ function saveCategory(category){
 }
 function getCategories(){
     return getFromLocalStorage('categoriesArray');
-    return [{title: "Uni Projects", color: "#FFFFFF"}, {title: "Development", color: "#6549AB"}];
 }
 function deleteCategory(categoryTitleToRemove){
     deleteFromLocalStorage('categoriesArray', categoryTitleToRemove);

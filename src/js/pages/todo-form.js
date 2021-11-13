@@ -1,3 +1,7 @@
+/**
+ * @author Pol Saula
+ */
+
 $(document).ready(function(){
     var categories = getCategories();
 
