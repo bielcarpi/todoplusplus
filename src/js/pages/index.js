@@ -5,8 +5,7 @@
 *   - Create HTML to display all tasks
 */
 $(document).ready(function(){
-    displayAllTasks();
-    createSummaryOfTasks();
     createSearchEngine();
     createCategoriesSection();
+    displayAllTasks();
 });

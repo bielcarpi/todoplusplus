@@ -3,31 +3,48 @@
  */
 
 
-const ALL_TASKS = 1;
-const TODAY_TASKS = 2;
-let current_tasks_displaying = ALL_TASKS;
+const ALL_DUTIES = 1;
+const TODAY_DUTIES = 2;
+const SEARCH_ENGINE = 3;
+let currentState = ALL_DUTIES; //We'll be modifying the current state of the view
 
 /*
 * Clears the screen and displays all the current tasks
 */
 function displayAllTasks(){
-    current_tasks_displaying = ALL_TASKS;
+    currentState = ALL_DUTIES;
     clearTasksFromDOM();
+
     let orderedTasks = orderTasksByDate(getTasks());
+    if(orderedTasks == null){ //If there are no tasks, return
+        updateSummaryOfTasks(null);
+        return;
+    }
+
     for(let task of orderedTasks)
         addTaskToDOM(getTaskHTML(task));
 
     updateDoneDeleteButtons();
+    updateSummaryOfTasks(orderedTasks);
 }
 /*
 * Clears the screen and displays tasks with deadline today
 */
 function displayTodayTasks(){
-    current_tasks_displaying = TODAY_TASKS;
+    currentState = TODAY_DUTIES;
     clearTasksFromDOM();
-    let tasks = getTasks();
-    for(let task of tasks){
+
+    let orderedTasks = orderTasksByDate(getTodayTasks());
+    if(orderedTasks == null){ //If there are no tasks, return
+        updateSummaryOfTasks(null);
+        return;
     }
+
+    for(let task of orderedTasks)
+        addTaskToDOM(getTaskHTML(task));
+
+    updateDoneDeleteButtons();
+    updateSummaryOfTasks(orderedTasks);
 }
 /**
  * Clears the screen and searches for tasks that have the text introduced either in the title, description or category
@@ -58,6 +75,8 @@ function clearTasksFromDOM(){
  * If two tasks share the same deadline, they'll be ordered depending on whether they're done or not
  */
 function orderTasksByDate(tasks){
+    if(tasks == null) return null;
+
     for(let task of tasks){
         let dateArray = task.deadline.split('/'); // 12/11/2000 will split into 12 (day), 11 (month), 2000 (year)
         task.deadline = new Date(dateArray[2], dateArray[1] - 1, dateArray[0]).getTime();
@@ -153,8 +172,8 @@ function selectAllClicked(){
 * It will mark as done all selected tasks. If they're done, they'll be marked as undone 
 */
 function doneSelectedClicked(){
-    tasksCheckedTitle = getCheckedTasksTitle();
-    if(checkedTasks.length == 0) return;
+    let tasksCheckedTitle = getCheckedTasksTitle();
+    if(tasksCheckedTitle.length == 0) return;
 
     for(let taskTitle of tasksCheckedTitle){
         task = getTask(taskTitle);
@@ -163,7 +182,14 @@ function doneSelectedClicked(){
         saveTask(task); //Save it again
     }
 
-    displayAllTasks();
+    switch(currentState){
+        case ALL_DUTIES: displayAllTasks();
+            break;
+        case TODAY_DUTIES: displayTodayTasks();
+            break;
+        case SEARCH_ENGINE: onChangeSearchText();
+            break;
+    }
 }
 /*
 * This function will be called when the "Delete" button has been clicked.
@@ -176,7 +202,14 @@ function deleteSelectedClicked(){
     for(let task of checkedTasks)
         deleteTask(task);
     
-    displayAllTasks();    
+    switch(currentState){
+        case ALL_DUTIES: displayAllTasks();
+            break;
+        case TODAY_DUTIES: displayTodayTasks();
+            break;
+        case SEARCH_ENGINE: onChangeSearchText();
+            break;
+    }
 }
 
 /*

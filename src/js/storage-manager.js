@@ -8,6 +8,24 @@ function saveTask(task){
 function getTasks(){
     return getFromLocalStorage('tasksArray');
 }
+function getTodayTasks(){
+    let allTasks = getFromLocalStorage('tasksArray');
+    if(allTasks == null) return null; // Return null if there aren't tasks
+
+    let todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0); //We don't want time, only the date
+    todayDate = todayDate.getTime();
+
+    let todayTasks = [];
+    for(let task of allTasks){
+        let dateArray = task.deadline.split('/'); // 12/11/2000 will split into 12 (day), 11 (month), 2000 (year)
+        let deadline = new Date(dateArray[2], dateArray[1] - 1, dateArray[0]).getTime();
+
+        if(deadline == todayDate) todayTasks.push(task); //If the deadline of the task is today, push it to the todayTasks array
+    }
+
+    return todayTasks.length == 0? null: todayTasks; //Return null if todayTasks is empty. Else, return todayTasks
+}
 function getTask(taskTitle){
     let tasks = getFromLocalStorage('tasksArray')
     for(let i = 0; i < tasks.length; i++)
