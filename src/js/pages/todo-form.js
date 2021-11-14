@@ -103,7 +103,7 @@ function validateFormOnSubmit () {
     title: title.value,
     image: imageSrc.pathname,
     deadline: deadline.value,
-    categories: category.value + ',', //Multiple categories should follow the format --> 'Uni Projects,Development,',
+    categories: category.value + ',', // Multiple categories should follow the format --> 'Uni Projects,Development,',
     description: description.value,
     completed: completed.checked
   }

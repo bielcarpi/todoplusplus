@@ -4,19 +4,19 @@
 
 function createCategoriesSection () {
   console.log('Creating categories section')
-  updateCategoryList();
+  updateCategoryList()
 }
 
 function newCategory () {
-  const categoryName = $('#category-name')[0].value;
-  const categoryColor = $('#category-color')[0].value;
+  const categoryName = $('#category-name')[0].value
+  const categoryColor = $('#category-color')[0].value
 
   const category = {
     title: categoryName,
     color: categoryColor
   }
   saveCategory(category)
-  updateCategoryList();
+  updateCategoryList()
 
   switch (currentState) {
     case ALL_DUTIES: displayAllTasks()
@@ -29,9 +29,9 @@ function newCategory () {
 }
 
 function removeCategory (categoryHTML) {
-  const categoryName = categoryHTML.getElementsByClassName('name')[0].innerHTML;
-  deleteCategory(categoryName); //Delete the category
-  updateCategoryList(); //And load again the category list
+  const categoryName = categoryHTML.getElementsByClassName('name')[0].innerHTML
+  deleteCategory(categoryName) // Delete the category
+  updateCategoryList() // And load again the category list
 
   switch (currentState) {
     case ALL_DUTIES: displayAllTasks()
@@ -43,16 +43,16 @@ function removeCategory (categoryHTML) {
   }
 }
 
-function updateCategoryList(){
-    const categoryListDiv = $('.category-list')[0];
-    const categories = getCategories();
+function updateCategoryList () {
+  const categoryListDiv = $('.category-list')[0]
+  const categories = getCategories()
 
-    categoryListDiv.innerHTML = ''; //Clean possible current categories
-    if(categories == null) return; //If there aren't categories, we're done
+  categoryListDiv.innerHTML = '' // Clean possible current categories
+  if (categories == null) return // If there aren't categories, we're done
 
-    for(const category of categories){
-        let categoryDiv = document.createElement('div');
-        categoryDiv.innerHTML = getCategoryHTML(category.title, category.color);
-        categoryListDiv.appendChild(categoryDiv);
-    }
+  for (const category of categories) {
+    const categoryDiv = document.createElement('div')
+    categoryDiv.innerHTML = getCategoryHTML(category.title, category.color)
+    categoryListDiv.appendChild(categoryDiv)
+  }
 }

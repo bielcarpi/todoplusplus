@@ -44,7 +44,7 @@ function getCategories () {
 }
 function getCategory (categoryTitle) {
   const categories = getFromLocalStorage('categoriesArray')
-  if(categories == null) return null;
+  if (categories == null) return null
 
   for (let i = 0; i < categories.length; i++) { if (categories[i].title == categoryTitle) return categories[i] }
 
