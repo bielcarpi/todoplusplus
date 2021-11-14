@@ -9,7 +9,7 @@ $(document).ready(function () {
     for (let i = 0; i < categories.length; i++) {
       const option = document.createElement('option')
       option.textContent = categories[i].title
-      document.getElementById('taskCategory').appendChild(option)
+      document.getElementById('select-category').appendChild(option)
     }
   }
 })
@@ -62,7 +62,7 @@ function validateFormOnSubmit () {
   const image = document.getElementById('taskLogo')
   const title = document.getElementById('taskTitle')
   const deadline = document.getElementById('taskDeadline')
-  const category = document.getElementById('taskCategory')
+  const category = document.getElementById('select-category')
   const description = document.getElementById('taskDescription')
   const completed = document.getElementById('taskCompleted')
   const error = document.getElementById('errorname')
@@ -103,7 +103,7 @@ function validateFormOnSubmit () {
     title: title.value,
     image: imageSrc.pathname,
     deadline: deadline.value,
-    categories: 'Uni Projects,Development,',
+    categories: category.value + ',', //Multiple categories should follow the format --> 'Uni Projects,Development,',
     description: description.value,
     completed: completed.checked
   }

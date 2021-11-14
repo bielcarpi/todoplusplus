@@ -70,3 +70,18 @@ function getTaskHTML (task) {
 
   return taskHTML
 }
+
+function getCategoryHTML(categoryName, categoryColor){
+    return `
+        <div class="category">
+            <div class="delete-category-button">
+                <button class="delete-category-button" onclick="removeCategory(this.parentElement.parentElement)"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="category-color" style="background-color: ${categoryColor};">
+            </div>
+            <div class="category-name">
+                <p class="name">${categoryName}</p>
+            </div>
+        </div>
+    `
+}

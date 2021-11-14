@@ -4,38 +4,55 @@
 
 function createCategoriesSection () {
   console.log('Creating categories section')
+  updateCategoryList();
 }
 
-function addCategory () {
-  const name = document.getElementById('category-name').value
-  const color = document.getElementById('category-color').value
-  // if (checkName(name) == 0 && checkColor(color) == 0 ) {
+function newCategory () {
+  const categoryName = $('#category-name')[0].value;
+  const categoryColor = $('#category-color')[0].value;
+
   const category = {
-    title: name,
-    color: color
+    title: categoryName,
+    color: categoryColor
   }
   saveCategory(category)
-  // }
+  updateCategoryList();
+
+  switch (currentState) {
+    case ALL_DUTIES: displayAllTasks()
+      break
+    case TODAY_DUTIES: displayTodayTasks()
+      break
+    case SEARCH_ENGINE: onChangeSearchText()
+      break
+  }
 }
 
-function removeCategory () {
-  const name = document.getElementById('name').value
-  deleteCategory(name)
+function removeCategory (categoryHTML) {
+  const categoryName = categoryHTML.getElementsByClassName('name')[0].innerHTML;
+  deleteCategory(categoryName); //Delete the category
+  updateCategoryList(); //And load again the category list
+
+  switch (currentState) {
+    case ALL_DUTIES: displayAllTasks()
+      break
+    case TODAY_DUTIES: displayTodayTasks()
+      break
+    case SEARCH_ENGINE: onChangeSearchText()
+      break
+  }
 }
 
-/*
-function checkName(name){
-    if (name.length < 2){
-        return -1;
-    } else {
-        return 1;
+function updateCategoryList(){
+    const categoryListDiv = $('.category-list')[0];
+    const categories = getCategories();
+
+    categoryListDiv.innerHTML = ''; //Clean possible current categories
+    if(categories == null) return; //If there aren't categories, we're done
+
+    for(const category of categories){
+        let categoryDiv = document.createElement('div');
+        categoryDiv.innerHTML = getCategoryHTML(category.title, category.color);
+        categoryListDiv.appendChild(categoryDiv);
     }
 }
-
-function checkColor(color){
-    if (color == null){
-        return -1;
-    } else {
-        return 1;
-    }
-} */
