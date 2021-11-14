@@ -13,7 +13,7 @@ function getTaskHTML(task){
     if(task.description.length > 70) task.description = task.description.substring(0, 70);
 
     //Let's check whether the task is urgent or not (by urgent, it means that its deadline is more than 7 days old)
-    let urgent = false
+    let urgent = false;
     if(!task.completed){ //If the task's not completed, check
         let taskDate = new Date(task.deadline).getTime();
         let currentDate = new Date().getTime();
