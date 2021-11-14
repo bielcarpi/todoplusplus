@@ -2,15 +2,51 @@
  * @author Biel Carpi
  */
 
+
 /*
-* This function will be called to display all the current tasks
+* Clears the screen and displays all the current tasks
 */
 function displayAllTasks(){
-    console.log("Displaying all tasks");
+    clearTasksFromDOM();
+    let tasks = getTasks();
+    for(let task of tasks)
+        addTaskToDOM(getTaskHTML(task));
 }
-//TODO:
-//TODO: Pass to server task attributes, and make the server return the correct task HTML
-//TODO: 
+
+/*
+* Clears the screen and displays tasks with deadline today
+*/
+function displayTodayTasks(){
+    clearTasksFromDOM();
+    let tasks = getTasks();
+    for(let task of tasks){
+
+    }
+}
+
+/**
+ * Given an array of task objects, it will return the array ordered from newer deadline to older deadline
+ * If two tasks share the same deadline, they'll be ordered depending on whether they're done or not
+ */
+function orderTasksByDate(tasks){
+
+}
+
+function addTaskToDOM(taskHTML){
+    let taskDiv = document.createElement('div');
+    taskDiv.innerHTML = taskHTML;
+    $(".task-list")[0].appendChild(taskDiv);
+}
+
+function clearTasksFromDOM(){
+    $(".task-list")[0].innerHTML = '';
+}
+
+
+function taskClicked(){
+    console.log('task clicked');
+}
+
 
 /*
 * This function will be called when the "Select All" button has been clicked.
@@ -29,55 +65,46 @@ function selectAllClicked(){
 
 /*
 * This function will be called when the "Done" button has been clicked.
-* It will mark as done all selected tasks 
+* It will mark as done all selected tasks. If they're done, they'll be marked as undone 
 */
 function doneSelectedClicked(){
+    tasksCheckedTitle = getCheckedTasksTitle();
 
+    for(let taskTitle of tasksCheckedTitle){
+        task = getTask(taskTitle);
+        deleteTask(taskTitle);
+        task.completed = task.completed? false: true; //Revert state
+        saveTask(task); //Save it again
+    }
 
+    displayAllTasks();
 }
 
 /*
 * This function will be called when the "Delete" button has been clicked.
-* It will delete all selected tasks on the server, and in the HTML
+* It will delete all selected tasks on the server, and update the HTML
 */
 function deleteSelectedClicked(){
-    let checkedTasksNumber = getCheckedTasksNumber();
-    let tasksChecked = getTasksByNumber(checkedTasksNumber);
-    for(let task of tasksChecked)
-        task.remove();
-
-    //TODO: Remove from server too
+    let checkedTasks = getCheckedTasksTitle();
+    for(let task of checkedTasks)
+        deleteTask(task);
+    
+    displayAllTasks();    
 }
 
 
 /*
 * Returns the number of the tasks that are checked (each task has a number, starting by 0)
 */
-function getCheckedTasksNumber(){
-    let tasks = $(".task");
-    let tasksCheckedNumber = [];
+function getCheckedTasksTitle(){
+    let checkedTasks = $(".task");
+    let tasksCheckedTitle = [];
     //Go through all tasks checking whether they're selected or not.
-    for(let task of tasks){
-        let currentTaskCheckbox = $('#' + task.id + ' input[type=checkbox]')[0];
-
-        //Check whether the current task checkbox is checked.
-        if(currentTaskCheckbox.checked){
-            let taskNumber = task.id;
-            taskNumber = taskNumber.match(/\d+/); //Extract only numbers from that string
-            tasksCheckedNumber.push(taskNumber);
-        } 
+    for(let task of checkedTasks){
+        //If the checkbox of this task is checked, let's save its name to the tasksCheckedTitle
+        if(task.querySelectorAll('input[type=checkbox]')[0].checked)
+            tasksCheckedTitle.push(task.getElementsByClassName('task-title')[0].innerHTML);
     }
 
-    return tasksCheckedNumber;
-}
-
-/*
-* Returns the HTML tasks provided its number
-*/
-function getTasksByNumber(numbers){
-    let tasks = [];
-    for(let i = 0; i < numbers.length; i++)
-        tasks.push($('#task' + numbers[i])); 
-
-    return tasks;
+    return tasksCheckedTitle;
 }

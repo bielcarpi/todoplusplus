@@ -3,10 +3,17 @@
  */
 
 function saveTask(task){
-    saveToLocalStorage('taskArray', task);
+    saveToLocalStorage('tasksArray', task);
 }
 function getTasks(){
     return getFromLocalStorage('tasksArray');
+}
+function getTask(taskTitle){
+    let tasks = getFromLocalStorage('tasksArray')
+    for(let i = 0; i < tasks.length; i++)
+        if(tasks[i].title == taskTitle) return tasks[i];
+
+    return null;
 }
 function deleteTask(taskTitleToRemove){
     deleteFromLocalStorage('tasksArray', taskTitleToRemove);
@@ -18,6 +25,13 @@ function saveCategory(category){
 }
 function getCategories(){
     return getFromLocalStorage('categoriesArray');
+}
+function getCategory(categoryTitle){
+    let categories = getFromLocalStorage('categoriesArray')
+    for(let i = 0; i < categories.length; i++)
+        if(categories[i].title == categoryTitle) return categories[i];
+
+    return null;
 }
 function deleteCategory(categoryTitleToRemove){
     deleteFromLocalStorage('categoriesArray', categoryTitleToRemove);
@@ -40,10 +54,11 @@ function getFromLocalStorage(nameOfKey){
     return getObjectsFromStringifiedArray(localStorage.getItem(nameOfKey));
 }
 function deleteFromLocalStorage(nameOfKey, objectTitleToRemove){
+    //For this method to work properly, the objects that are passed need to have a title property (the one property which will be compared for removing)
     let objects = getObjectsFromStringifiedArray(localStorage.getItem(nameOfKey));
     for(let i = 0; i < objects.length; i++)
-        if(objects[i].title == objectTitleToRemove) objects.splice(i, i);
-        //For this method to work properly, the objects that are passed need to have a title property (the one property which will be compared for removing)
+        if(objects[i].title == objectTitleToRemove)
+            objects.splice(i, 1);
     
     localStorage.setItem(nameOfKey, convertObjectsToStringifiedArray(objects)); //Save all the objects without the removed one
 }

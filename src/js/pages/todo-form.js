@@ -14,12 +14,20 @@ $(document).ready(function(){
     }
 });
 
+
+/**
+ * Changes the image of the task with the image clicked
+ */
 function changeTaskImage(){
     var targetElement = event.target;
     document.getElementById('taskLogo').src = targetElement.src;
 }
 
-// Validates that the input string is a valid date formatted as "mm/dd/yyyy"
+
+/**
+ * Validates that the input string is a valid date formatted as "dd/mm/yyyy"
+ *   and that it's between the year 2000 and 2200
+ */
 function isValidDate(dateString){
     // First check for the pattern
     if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)){
@@ -28,12 +36,12 @@ function isValidDate(dateString){
 
     // Parse the date parts to integers
     var parts = dateString.split("/");
-    var day = parseInt(parts[1], 10);
-    var month = parseInt(parts[0], 10);
+    var day = parseInt(parts[0], 10);
+    var month = parseInt(parts[1], 10);
     var year = parseInt(parts[2], 10);
 
     // Check the ranges of month and year
-    if(year < 1000 || year > 3000 || month == 0 || month > 12){
+    if(year < 2000 || year > 2200 || month == 0 || month > 12){
         return false;
     }
 
@@ -46,62 +54,62 @@ function isValidDate(dateString){
 
     // Check the range of the day
     return day > 0 && day <= monthLength[month - 1];
-};
+}
 
+
+/**
+ * Validates the form, possibly showing error messages.
+ * If the form is correct, saves the task data and returns to the root page
+ */
 function validateFormOnSubmit(){
-    var error = 0;
-
     const image = document.getElementById('taskLogo');
     const title = document.getElementById('taskTitle');
     const deadline = document.getElementById('taskDeadline');
     const category = document.getElementById('taskCategory');
     const description = document.getElementById('taskDescription');
     const completed = document.getElementById('taskCompleted');
+    const error = document.getElementById('errorname');
 
-    document.getElementById('errorname').innerHTML = "";
+    error.innerHTML = "";
 
     //Validate task's Title
     if(title.value == "" || title.value.length > 100){
-        document.getElementById('errorname').innerHTML="Title required. Maximum 100 characters lenght.";
+        error.innerHTML="Title required. Maximum 100 characters lenght.";
         title.focus();
-        error = 1;
+        return;
     }
 
     //Validate task's deadline
     if(!isValidDate(deadline.value)){
-        document.getElementById('errorname').innerHTML="Required date format: mm/dd/yyyy";
+        error.innerHTML="Date not valid. Required date format: dd/mm/yyyy";
         deadline.focus();
-        error = 1;
+        return;
     }
 
     //Validate task's Categories
     if(category.value == "Select category"){
-        document.getElementById('errorname').innerHTML="You must select at least 1 category.";
+        error.innerHTML="You must select at least 1 category.";
         category.focus();
-        error = 1;
+        return;
     }
-    
 
     //Validate task's Description
     if(description.value == "" || description.value.length > 1000){
-        document.getElementById('errorname').innerHTML="Description required. Maximum 1.000 characters lenght.";
+        error.innerHTML="Description required. Maximum 1.000 characters lenght.";
         description.focus();
-        error = 1;
+        return;
     }
 
-    console.log(category.value);
-
-    if(error == 0){
-        var task = {
-            'title': title.value,
-            'image': image.src,
-            'deadline': deadline.value,
-            'category': category.value,
-            'description': description.value,
-            'completed': completed.value
-        }
-
-        saveTask(task);
+    let imageSrc = document.createElement('a'); //We only want the relative url. The a tag allows us to select different parts of the url
+    imageSrc.href = image.src;
+    let task = {
+        'title': title.value,
+        'image': imageSrc.pathname,
+        'deadline': deadline.value,
+        'categories': "Uni Projects,Development,",
+        'description': description.value,
+        'completed': completed.checked
     }
-
+    saveTask(task);
+    window.location.replace("/"); //Redirect to root / once the task has been saved
 }
