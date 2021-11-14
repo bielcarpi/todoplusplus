@@ -11,6 +11,7 @@
     <meta name="description" content="TODO++ is a next-generation TODO task management web application built with node.js">
     <meta name="keywords" content="node, task, management, TODO, list, web, aplication, next, generation">
     <meta name="author" content="Belen Garcia, Biel Carpi">
+    <meta name="robots" content="nofollow">
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -18,6 +19,9 @@
 
     <script src="https://kit.fontawesome.com/a8d17afe5b.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="js/element-builder.js"></script>
+    <script src="js/storage-manager.js"></script>
     <script src="js/pages/status.js"></script>
     <script src="js/pages/search-engine.js"></script>
     <script src="js/pages/categories.js"></script>
@@ -31,91 +35,71 @@
         <section id="add-todo">
             <header class="header-logo">
                 <img src="media/img/logo.png" alt="logo">
-                <h2>TODO++</h2>
+                <div class="next-to-logo">
+                    <h2>TODO++</h2>
+                </div>
             </header>
-            <button class="normal-button enabled" id="add" onclick="todo-form.html">
-                <p>Add TODO</p>
+            <button class="normal-button enabled" id="add">
+                <a class="link-button" href="todo-form.html">Add TODO</a>
             </button>
             <div class="view-what-tasks">
-                <div> 
-                    <a class="view-options" href="today">★  Today</a> <!--T'ha de portar a les tasques que tenen deadline avui-->
+                <div class="view-container"> 
+                    <a id="today-text" class="view-options" onclick="displayTodayTasks()"><i class="fas fa-calendar-week"></i> Today</a> <!--T'ha de portar a les tasques que tenen deadline avui-->
                 </div>
-                <div class="view-options"> 
-                    <a href="all duties">★  All duties</a>  <!--T'ha de portar a veure totes les tasques-->
+                <div class="view-container"> 
+                    <a id="allduties-text" class="view-options" onclick="displayAllTasks()"><i class="fas fa-list-ul"></i> All duties</a>  <!--T'ha de portar a veure totes les tasques-->
                 </div>
             
-                <div class="view-options"> 
-                    <p>★   Categories</p>
+                <div class="add-categories-container"> 
+                    <p class="view-options normal-cursor"><i class="fas fa-shapes"></i> Categories</p>
                     <div class="categories-add">
-                        <select class="select-category-color" name="categoryColor" placeholder="Select category color">
-                            <option selected disabled></option>
-                            <option value="F94144">★</option>
-                            <option value="F9C74F">★</option>
-                            <option value="43AA8B">★</option>
-                            <option value="666666">★</option>
-                            <option value="FFFFFF">★</option>
-                        </select>
-                        <div class="category-name-textbox"> 
-                            <input type="category-name" name="category-name" id="category-name"></input>
+                        <div class="select-div">
+                            <select class="select-category-color" id="category-color" name="categoryColor" placeholder="Select category color">
+                                <option value="#F84144">Red</option>
+                                <option value="#F9C74E">Yellow</option>
+                                <option value="#44AB8C">Green</option>
+                                <option value="#277CA1">Blue</option>
+                                <option value="#666666">Gray</option>
+                                <option value="#000000">Black</option>
+                            </select>
                         </div>
-                        <button class="button-confirm-category">
-                            <p>✔</p>
+                        <div class="category-name-textbox"> 
+                            <input type="text" name="category-name" id="category-name"></input>
+                        </div>
+                        <button class="button-confirm-category" onclick="newCategory()">
+                            <p><i class="fas fa-check"></i></p>
                         </button>
                     </div>
+                </div>
+                <div class="category-list">
                 </div>
             </div>        
         </section>
         <!-- View Tasks Section -->
         <section id="view-tasks">
-            <h1>★ All Duties</h1>
+            <h1><i class="fas fa-list-ul"></i> All Duties</h1>
             <div class="horizontal-form">
                 <div>
-                    <div class="normal-button" onclick="selectAllClicked()">
+                    <div id="select-all-button" class="normal-button" onclick="selectAllClicked()">
                         <span>Select All</span>
                     </div>
 
-                    <div class="normal-button squared disabled" onclick="doneSelectedClicked()">
-                        <span>✔</span>
+                    <div id="done-button" class="normal-button squared disabled" onclick="doneSelectedClicked()">
+                        <span><i class="fas fa-check"></i></span>
                     </div>
 
-                    <div class="normal-button squared disabled" onclick="deleteSelectedClicked()">
-                        <span>✘</span>
+                    <div id="delete-button" class="normal-button squared disabled" onclick="deleteSelectedClicked()">
+                        <span><i class="fas fa-trash"></i></span>
                     </div>
                 </div>
                 <div class="searchbox-container">
-                    <input type="search" name="searchbox" id="searchbox">
-                    <span>✘</span>
+                    <input type="search" name="searchbox" id="searchbox" onchange="onChangeSearchText(this.value)">
+                    <span><i class="fas fa-search"></i></span>
                 </div>
             </div>
 
             <div class="task-list">
-                
-                <div class="task" id="task1">
-                    <div class="task-subcontainer task-checkbox-container">
-                        <input type="checkbox">
-                    </div>
-                    <div class="task-subcontainer task-description-container">
-                        <div class="task-main-info">
-                            <h2 class="task-title">Web Projects 1</h2>
-                            <div>
-                                <span class="task-urgent">Urgent!</span>
-                                <span class="task-date">20/11/2021</span>
-                            </div>
-                        </div>
-                        <p class="task-description">Create a TODO list site web</p>
-                        <div class="task-categories">
-                            <div class="task-category">
-                                <span>Development</span>
-                                <div style="background-color: red;"></div>
-                            </div>
-                            <div class="task-category">
-                                <span>Uni Projects</span>
-                                <div style="background-color: green;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                <!-- Where tasks will go-->
             </div>
 
         </section>

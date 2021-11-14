@@ -23,6 +23,7 @@ else{
 //Serving static content with express middleware (dist directory)
 app.use(express.static(staticFilesPath));
 
+
 app.get('/', (req, res) => {
     res.sendFile(staticFilesPath + 'index.html');
 });

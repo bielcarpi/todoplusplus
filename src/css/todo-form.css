@@ -1,14 +1,15 @@
 body{
     box-sizing: border-box;
+    background-color: #f2f2f2;
 }
 
 .form {
     border-radius: 5px;
-    background-color: #f2f2f2;
     padding-right: 10%;
     padding-left: 10%;
     padding-top: 5%;
     padding-bottom: 5%;
+    font-size: 20px;
 }
 
 .hdr {
@@ -21,7 +22,7 @@ body{
 
 .currImg {
     width: auto;
-    height: 80px;
+    height: 120px;
     padding-right: 20px;
 }
 
@@ -37,7 +38,7 @@ body{
 }
 
 .taskImage img {
-    height: 40px;
+    height: 60px;
     margin-left: 7px;
     margin-right: 7px;
     cursor: pointer;
@@ -47,6 +48,7 @@ body{
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 2fr 1fr;
+    margin-bottom: 20px;
 }
 
 .fila div:first-child {
@@ -74,7 +76,7 @@ input[type=text], textarea {
     border-radius: 4px;
     box-sizing: border-box;
     margin-top: 6px;
-    margin-bottom: 16px;
+    margin-bottom: 36px;
     resize: vertical;
     color: black;
 }
@@ -86,10 +88,19 @@ input[type=text], textarea {
 #taskCategory i{
     padding-left: 50px;
 }
+#select-category{
+    background-color: #DFDEE7;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
 
 .error{
-    color: #D8000C;
+    color: #FF0000;
+    font-weight: 700;
     text-align: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
 }
   
 .envia {
@@ -112,8 +123,12 @@ input[type=text], textarea {
 }
 
 .check {
-    display: inline-flex;
-    vertical-align:middle;
+    display: flex;
+    align-items: center;
+}
+#taskCompleted{
+    transform: scale(2);
+    margin: 0 10px;
 }
 
 .check p{

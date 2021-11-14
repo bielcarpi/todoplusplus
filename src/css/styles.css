@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;900&display=swap');
 
 body{
     font-weight: 500;
@@ -18,25 +18,21 @@ body{
     font-size: 24px;
     display: inline-block;
     margin: 0 5px;
+    transition: color 0.5s, background-color 0.5s;
 }
 .normal-button:hover{
-    background-color: #8b83a7;
+    background-color: #8A73D9;
 }
 .normal-button.squared{
     padding: 15px 20px;
 }
 .normal-button.disabled{
     background-color: #C6C6C6;
+    cursor: default;
 }
-.normal-button.enabled{
-    background-color: #8B73D9;
+.normal-button.disabled:hover{
+    background-color: #C6C6C6;
 }
-
-a:link{
-    text-decoration: none;
-    color:black;
-}
-a:active{
-    text-decoration: none;
-    color:#8B73D9;
+.normal-button.enabled:hover{
+    background-color: #8A73D9;
 }

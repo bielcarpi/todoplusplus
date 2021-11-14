@@ -11,14 +11,16 @@
         <meta name="description" content="TODO++ is a next-generation TODO task management web application built with node.js">
         <meta name="keywords" content="node, task, management, TODO, list, web, aplication, next, generation">
         <meta name="author" content="Pol Saula">
-        
+        <meta name="robots" content="nofollow">
+
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="css/todo-form.css">
         <link rel="stylesheet" href="css/styles.css">
 
         <script src="https://kit.fontawesome.com/a8d17afe5b.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="js/pages/storage-manager.js"></script>
+        <script src="js/element-builder.js"></script>
+        <script src="js/storage-manager.js"></script>
         <script src="js/pages/todo-form.js"></script>
     </head>
     <body>
@@ -47,8 +49,10 @@
                         </div>
                     </div>
                     <label for="taskCategory">Category</label>
-                    <div id="taskCategory" name="category" placeholder="Select category">
-                        <p>Select Category<i class="fas fa-angle-down"></i></p>
+                    <div id="taskCategory" name="category">
+                        <select id="select-category">
+                            <option value="Select category">Select category</option>
+                        </select>
                     </div>  
                 
                     <label for="taskDescription">Description</label>
