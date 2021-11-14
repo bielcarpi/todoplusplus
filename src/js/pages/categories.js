@@ -1,3 +1,7 @@
+/**
+ * @author Belen Garcia
+ */
+
 function createCategoriesSection(){
     console.log("Creating categories section");
 }

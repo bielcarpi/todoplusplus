@@ -13,6 +13,7 @@ let currentState = ALL_DUTIES; //We'll be modifying the current state of the vie
 */
 function displayAllTasks(){
     currentState = ALL_DUTIES;
+    toggleActiveText();
     clearTasksFromDOM();
 
     let orderedTasks = orderTasksByDate(getTasks());
@@ -32,6 +33,7 @@ function displayAllTasks(){
 */
 function displayTodayTasks(){
     currentState = TODAY_DUTIES;
+    toggleActiveText();
     clearTasksFromDOM();
 
     let orderedTasks = orderTasksByDate(getTodayTasks());
@@ -55,6 +57,22 @@ function displayTasksWithText(text){
 
 }
 
+/**
+ * Disables one text and enables the other one (All duties and today texts)
+ */
+function toggleActiveText(){
+    let allDutiesText = $("#allduties-text");
+    let todayText = $("#today-text");
+
+    if(allDutiesText.hasClass('active')){
+        allDutiesText.removeClass('active');
+        todayText.addClass('active');
+    }
+    else{
+        todayText.removeClass('active');
+        allDutiesText.addClass('active');
+    }
+}
 
 /**
  * Given the HTML of a task, add them to the DOM

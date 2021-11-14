@@ -1,3 +1,7 @@
+/**
+ * @author Belen Garcia
+ */
+
 function updateSummaryOfTasks(tasks){
     let numDuties = 0;
     let numUrgent = 0;
