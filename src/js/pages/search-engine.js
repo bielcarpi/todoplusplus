@@ -3,7 +3,6 @@ function createSearchEngine(){
 
 
     let searchbox = $('#searchbox')[0];
-    console.log(searchbox);
     searchbox.addEventListener('input', onChangeSearchText);
     searchbox.addEventListener('propertychange', onChangeSearchText); // for IE8
 }

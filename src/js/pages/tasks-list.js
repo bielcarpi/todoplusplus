@@ -61,7 +61,6 @@ function orderTasksByDate(tasks){
     for(let task of tasks){
         let dateArray = task.deadline.split('/'); // 12/11/2000 will split into 12 (day), 11 (month), 2000 (year)
         task.deadline = new Date(dateArray[2], dateArray[1] - 1, dateArray[0]).getTime();
-        console.log(task.deadline);
     }
 
     //Selection Sort Algorithm :)
@@ -100,7 +99,6 @@ function orderTasksByDate(tasks){
     for(let task of orderedTasks)
         task.deadline = new Date(task.deadline).toLocaleString("es-ES", localeOptions); 
 
-    console.log(orderedTasks);
     return orderedTasks;
 }
 
@@ -118,16 +116,16 @@ function taskClicked(){
  * Updates the Done and Delete buttons depending on whether they should be active or not
  */
 function updateDoneDeleteButtons(){
-    let buttons = $(".normal-button .squared");
+    let buttons = $(".normal-button.squared");
 
     //If some checkbox is checked, buttons need to be active
-    if($('input[type="checkbox"]:checked') != null){
-        buttons.removeClass('disabled');
-        buttons.addClass('enabled');
+    if($('input[type="checkbox"]:checked')[0] != null){
+        buttons.removeClass("disabled");
+        buttons.addClass("enabled");
     }
     else{
-        buttons.removeClass('enabled');
-        buttons.addClass('disabled');
+        buttons.removeClass("enabled");
+        buttons.addClass("disabled");
     }
 }
 
@@ -156,6 +154,7 @@ function selectAllClicked(){
 */
 function doneSelectedClicked(){
     tasksCheckedTitle = getCheckedTasksTitle();
+    if(checkedTasks.length == 0) return;
 
     for(let taskTitle of tasksCheckedTitle){
         task = getTask(taskTitle);
@@ -172,6 +171,8 @@ function doneSelectedClicked(){
 */
 function deleteSelectedClicked(){
     let checkedTasks = getCheckedTasksTitle();
+    if(checkedTasks.length == 0) return;
+
     for(let task of checkedTasks)
         deleteTask(task);
     
