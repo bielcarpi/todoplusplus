@@ -16,6 +16,8 @@ function displayAllTasks(){
     let orderedTasks = orderTasksByDate(getTasks());
     for(let task of orderedTasks)
         addTaskToDOM(getTaskHTML(task));
+
+    updateDoneDeleteButtons();
 }
 /*
 * Clears the screen and displays tasks with deadline today
@@ -58,7 +60,8 @@ function clearTasksFromDOM(){
 function orderTasksByDate(tasks){
     for(let task of tasks){
         let dateArray = task.deadline.split('/'); // 12/11/2000 will split into 12 (day), 11 (month), 2000 (year)
-        task.deadline = new Date(dateArray[2], dateArray[1], dateArray[0]).getTime();
+        task.deadline = new Date(dateArray[2], dateArray[1] - 1, dateArray[0]).getTime();
+        console.log(task.deadline);
     }
 
     //Selection Sort Algorithm :)
@@ -111,6 +114,23 @@ function taskClicked(){
 }
 
 
+/**
+ * Updates the Done and Delete buttons depending on whether they should be active or not
+ */
+function updateDoneDeleteButtons(){
+    let buttons = $(".normal-button .squared");
+
+    //If some checkbox is checked, buttons need to be active
+    if($('input[type="checkbox"]:checked') != null){
+        buttons.removeClass('disabled');
+        buttons.addClass('enabled');
+    }
+    else{
+        buttons.removeClass('enabled');
+        buttons.addClass('disabled');
+    }
+}
+
 
 
 /*
@@ -126,6 +146,8 @@ function selectAllClicked(){
     //Revert all checkboxes state
     for(let checkbox of taskCheckboxes)
         checkbox.checked = !checkbox.checked;
+
+    updateDoneDeleteButtons();    
 }
 
 /*

@@ -45,7 +45,7 @@ function getTaskHTML(task){
     let taskHTML = `
         <div class="task">
             <div class="task-subcontainer task-checkbox-container">
-                <input type="checkbox">
+                <input type="checkbox" onChange="updateDoneDeleteButtons()">
             </div>
             <div class="task-subcontainer task-description-container" onClick="taskClicked()">
                 <div class="task-image">
