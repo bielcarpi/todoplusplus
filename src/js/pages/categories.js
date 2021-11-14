@@ -5,15 +5,33 @@ function createCategoriesSection(){
 function addCategory(){
     const name = document.getElementById('category-name').value;
     const color = document.getElementById('category-color').value;
-    let category = { 
-        title: name, 
-        color: color
-    }
-    saveCategory(category);
+    //if (checkName(name) == 0 && checkColor(color) == 0 ) {
+        let category = { 
+            title: name, 
+            color: color
+        }
+        saveCategory(category);
+    //}
 }
 
 function removeCategory(){
-    var el = document.getElementsByClassName('category-name').value;
-    el.remove();
+    var name = document.getElementById('name').value;
     deleteCategory(name);
 }
+
+/*
+function checkName(name){
+    if (name.length < 2){
+        return -1;
+    } else {
+        return 1;
+    }
+}
+
+function checkColor(color){
+    if (color == null){
+        return -1;
+    } else {
+        return 1;
+    }
+}*/
